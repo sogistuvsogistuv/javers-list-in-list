@@ -22,29 +22,24 @@ public class TestClass {
                 .build();
 
 
-        List<Book> bookListOld = new ArrayList<>(
-                Arrays.asList(
-                        Book.builder().identifier("book1").condition("like new").title("Chronicles of...").build(),
-                        Book.builder().identifier("book2").condition("like new").title("David vs. Goliath").build()
-                )
-        );
-
-        List<Book> bookListNew = new ArrayList<>(
-                Arrays.asList(
-                        Book.builder().identifier("book1").condition("broken").title("Chronicles of...").build()
-//                        Book.builder().identifier("book2").condition("like new").title("David vs. Goliath").build()
-                )
-        );
-
-        List<Rent> lstPreviousEvent = new ArrayList<>(Arrays.asList(
-                Rent.builder().collectionIdentifier("Smith").books(bookListOld).build()
+        List<Book> bookListOld = new ArrayList<>(Arrays.asList(
+            new Book("book1", "like new", "Chronicles of..."),
+            new Book("book2", "like new", "Data vs. Goliath")
         ));
 
-        List<Rent> lstAfterEvent = new ArrayList<>(Arrays.asList(
-                Rent.builder().collectionIdentifier("Smith").books(bookListNew).build()
+        List<Book> bookListNew = new ArrayList<>(Arrays.asList(
+            new Book("book1", "broken", "Chronicles of...")
         ));
 
-        Diff difference = javers.compareCollections(lstPreviousEvent, lstAfterEvent, Rent.class);
+        List<Rent> lstRentOld = new ArrayList<>(Arrays.asList(
+            new Rent("Smith", bookListOld)
+        ));
+
+        List<Rent> lstRentNew = new ArrayList<>(Arrays.asList(
+            new Rent("Smith", bookListNew)
+        ));
+
+        Diff difference = javers.compareCollections(lstRentOld, lstRentNew, Rent.class);
 
         System.out.println(difference);
         System.out.println();

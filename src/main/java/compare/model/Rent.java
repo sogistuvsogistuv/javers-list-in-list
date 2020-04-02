@@ -9,15 +9,10 @@ import org.javers.core.metamodel.annotation.TypeName;
 
 import java.util.List;
 
-@Builder
-@AllArgsConstructor
-@Data
-@ToString
+@AllArgsConstructor @Data @ToString
 @TypeName("Rent")
 public class Rent {
-
     @Id
     private String collectionIdentifier;  // Person identifier which rented a list of books
     private List<Book> books;
-
 }
