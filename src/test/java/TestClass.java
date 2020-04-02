@@ -18,6 +18,7 @@ public class TestClass {
         Javers javers = JaversBuilder.javers()
                 .withListCompareAlgorithm(AS_SET)
                 .registerEntity(Rent.class)
+                .registerValue(Book.class)
                 .build();
 
 
@@ -43,12 +44,10 @@ public class TestClass {
                 Rent.builder().collectionIdentifier("Smith").books(bookListNew).build()
         ));
 
-
         Diff difference = javers.compareCollections(lstPreviousEvent, lstAfterEvent, Rent.class);
 
         System.out.println(difference);
-        System.out.println("");
-
+        System.out.println();
 
     }
 }
